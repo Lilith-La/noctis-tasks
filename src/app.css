@@ -20,6 +20,51 @@
   box-sizing: border-box;
 }
 
+/* ── Shared utilities (used across page components) ── */
+.page-section {
+  padding: 4rem 8% 8rem;
+}
+
+.page-title {
+  margin: 0.5rem 0 3rem;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: #d483a6;
+}
+
+.small-label {
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.glass-card {
+  padding: 2rem;
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 182, 193, 0.15);
+}
+
+.primary-btn {
+  border: none;
+  padding: 0.85rem 2rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffc8dd, #f5b8d3, #e9c6ff);
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(245, 174, 202, 0.35);
+}
+
 html {
   scroll-behavior: smooth;
 }
