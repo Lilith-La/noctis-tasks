@@ -13,6 +13,10 @@
   function deleteTask(id) {
     tasks = tasks.filter(t => t.id !== id);
   }
+
+  let progress = $derived(
+    tasks.length === 0 ? 0 : Math.round((tasks.filter(t => t.completed).length / tasks.length) * 100)
+  );
 </script>
 
 <section class="tasks-section">
@@ -31,9 +35,9 @@
       <div class="progress-card">
         <span>Today's Progress</span>
         <div class="progress-bar">
-          <div class="progress-fill"></div>
+          <div class="progress-fill" style="width: {progress}%"></div>
         </div>
-        <p>72% completed</p>
+        <p>{progress}% completed</p>
       </div>
     </div>
 

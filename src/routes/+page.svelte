@@ -4,8 +4,20 @@
   import FocusPage    from '$lib/components/FocusPage.svelte';
   import JournalPage  from '$lib/components/JournalPage.svelte';
   import SettingsPage from '$lib/components/SettingsPage.svelte';
+  import { settings, applyTheme } from '$lib/settings.svelte.js';
 
   let currentPage = $state('tasks');
+
+  $effect(() => {
+    applyTheme(settings.theme);
+    document.body.classList.toggle('no-glow',  !settings.glowOn);
+    document.body.classList.toggle('no-stars', !settings.starsOn);
+  });
+
+  function enterWorkspace() {
+    currentPage = 'tasks';
+    document.querySelector('.tasks-section')?.scrollIntoView({ behavior: 'smooth' });
+  }
 </script>
 
 <Sidebar bind:currentPage />
@@ -13,10 +25,14 @@
 <main>
 
   <section class="hero">
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
-    <div class="glow glow-3"></div>
-    <div class="stars"></div>
+    {#if settings.glowOn}
+      <div class="glow glow-1"></div>
+      <div class="glow glow-2"></div>
+      <div class="glow glow-3"></div>
+    {/if}
+    {#if settings.starsOn}
+      <div class="stars"></div>
+    {/if}
 
     <div class="content">
       <p class="label">Noctis Tasks</p>
@@ -25,7 +41,7 @@
         A gentle productivity space wrapped in dreamy pink glows,
         calm focus and late-night comfort.
       </p>
-      <button class="primary">Enter Workspace</button>
+      <button class="primary" onclick={enterWorkspace}>Enter Workspace</button>
     </div>
   </section>
 
@@ -92,6 +108,7 @@
     color: white;
     font-weight: 700;
     font-size: 1rem;
+    font-family: inherit;
     cursor: pointer;
     box-shadow: 0 0 45px rgba(255, 192, 203, 0.28);
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
@@ -129,7 +146,7 @@
   }
 
   @media (max-width: 768px) {
-    h1       { font-size: clamp(3.5rem, 14vw, 6rem); }
+    h1        { font-size: clamp(3.5rem, 14vw, 6rem); }
     .subtitle { font-size: 1rem; }
     .primary  { width: 100%; }
   }
