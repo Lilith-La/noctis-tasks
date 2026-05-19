@@ -2,7 +2,18 @@
   import TaskInput from './TaskInput.svelte';
   import TaskList  from './TaskList.svelte';
 
-  let tasks = $state([{ id: 1, title: 'Practice Svelte', completed: false }]);
+  const STORAGE_KEY = 'noctis-tasks';
+
+  function loadTasks() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); }
+    catch { return null; }
+  }
+
+  let tasks = $state(loadTasks() ?? [{ id: 1, title: 'Practice Svelte', completed: false }]);
+
+  $effect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  });
 
   function addTask(title) {
     tasks = [...tasks, { id: Date.now(), title, completed: false }];

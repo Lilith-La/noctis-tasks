@@ -1,19 +1,23 @@
 <script>
-  let entries = $state([
-    {
-      id: 1,
-      text: "Tonight felt calm. Pink sky, soft music, good thoughts.",
-      date: "May 18",
-    },
+  const STORAGE_KEY = 'noctis-journal';
+
+  function loadEntries() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); }
+    catch { return null; }
+  }
+
+  let entries = $state(loadEntries() ?? [
+    { id: 1, text: "Tonight felt calm. Pink sky, soft music, good thoughts.", date: "May 18" }
   ]);
   let journalText = $state("");
 
+  $effect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+  });
+
   function addEntry() {
     if (!journalText.trim()) return;
-    const date = new Date().toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-    });
+    const date = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" });
     entries = [{ id: Date.now(), text: journalText, date }, ...entries];
     journalText = "";
   }
