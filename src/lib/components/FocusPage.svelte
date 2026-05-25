@@ -39,9 +39,7 @@
   }
 
   function fmt(s) {
-    const m = Math.floor(s / 60)
-      .toString()
-      .padStart(2, "0");
+    const m = Math.floor(s / 60).toString().padStart(2, "0");
     const sec = (s % 60).toString().padStart(2, "0");
     return `${m}:${sec}`;
   }
@@ -52,27 +50,18 @@
   <h2 class="page-title">Deep work, soft light.</h2>
 
   <div class="focus-wrap">
-    <div class="glass-card timer-card">
+    <div class="timer-card">
       <div class="mode-tabs">
-        <button
-          class:active-tab={focusMode === "work"}
-          onclick={() => setMode("work")}>Work</button
-        >
-        <button
-          class:active-tab={focusMode === "short"}
-          onclick={() => setMode("short")}>Short break</button
-        >
-        <button
-          class:active-tab={focusMode === "long"}
-          onclick={() => setMode("long")}>Long break</button
-        >
+        <button class:active-tab={focusMode === "work"}  onclick={() => setMode("work")}>Work</button>
+        <button class:active-tab={focusMode === "short"} onclick={() => setMode("short")}>Short break</button>
+        <button class:active-tab={focusMode === "long"}  onclick={() => setMode("long")}>Long break</button>
       </div>
 
       <div class="timer-display">{fmt(timeLeft)}</div>
 
       <div class="timer-actions">
         <button class="icon-btn" onclick={resetTimer}>↺</button>
-        <button class="primary-btn" onclick={toggleTimer}>
+        <button class="start-btn" onclick={toggleTimer}>
           {running ? "Pause" : "Start"}
         </button>
       </div>
@@ -83,7 +72,7 @@
     </div>
 
     <div class="focus-side">
-      <div class="glass-card tip-card">
+      <div class="tip-card">
         <p class="tip-title">✨ Focus tip</p>
         <p class="tip-text">
           Close unnecessary tabs. Put on ambient music. Let your mind settle
@@ -91,7 +80,7 @@
         </p>
       </div>
 
-      <div class="glass-card tip-card glow-card">
+      <div class="tip-card glow-card">
         <p class="tip-title">🌸 Breathing</p>
         <p class="tip-text">
           Inhale 4s · Hold 4s · Exhale 6s. Repeat before each session.
@@ -108,59 +97,6 @@
     overflow: hidden;
   }
 
-  .page-glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.35;
-    pointer-events: none;
-  }
-
-  .glow-1 {
-    width: 320px;
-    height: 320px;
-    background: #f5aeca;
-    top: 0;
-    left: -120px;
-  }
-
-  .glow-2 {
-    width: 280px;
-    height: 280px;
-    background: #e9c6ff;
-    bottom: 0;
-    right: -100px;
-  }
-
-  .small-label {
-    position: relative;
-    z-index: 2;
-    color: #d483a6;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-size: 0.8rem;
-    margin-bottom: 1rem;
-  }
-
-  .page-title {
-    position: relative;
-    z-index: 2;
-    margin: 0;
-    font-size: clamp(3rem, 6vw, 5rem);
-    line-height: 1;
-    color: #cf7fa2;
-  }
-
-  .page-subtitle {
-    position: relative;
-    z-index: 2;
-    margin-top: 1.5rem;
-    max-width: 650px;
-    color: #b57f95;
-    line-height: 1.8;
-    font-size: 1.05rem;
-  }
-
   .focus-wrap {
     position: relative;
     z-index: 2;
@@ -171,27 +107,26 @@
     align-items: start;
   }
 
-  .glass-card {
-    border-radius: 2rem;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.45);
-    border: 1px solid rgba(255, 182, 193, 0.15);
-    backdrop-filter: blur(25px);
-  }
-
   .timer-card {
+    border-radius: 2rem;
+    padding: 2.5rem 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    box-shadow: 0 10px 40px rgba(245, 174, 202, 0.08);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
   }
 
   .mode-tabs {
     display: flex;
     gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.5);
+    background: var(--surface);
+    border: 1px solid var(--border);
     padding: 0.4rem;
     border-radius: 999px;
   }
@@ -201,7 +136,7 @@
     background: transparent;
     padding: 0.6rem 1.4rem;
     border-radius: 999px;
-    color: #c97898;
+    color: var(--text);
     font-size: 0.9rem;
     font-family: inherit;
     cursor: pointer;
@@ -209,20 +144,20 @@
   }
 
   .mode-tabs button:hover:not(.active-tab) {
-    background: rgba(255, 255, 255, 0.55);
+    background: var(--surface-strong);
   }
 
   .mode-tabs button.active-tab {
-    background: linear-gradient(135deg, #f5aeca, #e9c6ff);
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
     color: white;
     font-weight: 700;
-    box-shadow: 0 4px 20px rgba(245, 174, 202, 0.25);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
 
   .timer-display {
     font-size: clamp(5rem, 14vw, 9rem);
     font-weight: 700;
-    color: #d483a6;
+    color: var(--heading);
     letter-spacing: -0.06em;
     line-height: 1;
   }
@@ -237,9 +172,9 @@
     width: 54px;
     height: 54px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 182, 193, 0.2);
-    background: rgba(255, 255, 255, 0.55);
-    color: #c97898;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
     font-size: 1.3rem;
     cursor: pointer;
     transition: all 0.25s ease;
@@ -247,34 +182,35 @@
 
   .icon-btn:hover {
     transform: rotate(-25deg) scale(1.08);
+    background: var(--surface-strong);
   }
 
-  .primary-btn {
+  .start-btn {
     border: none;
-    padding: 1rem 2rem;
+    padding: 1rem 2.5rem;
     border-radius: 999px;
-    background: linear-gradient(135deg, #f5aeca, #e9c6ff);
+    background: linear-gradient(135deg, var(--btn-from), var(--btn-mid), var(--btn-to));
     color: white;
     font-size: 1rem;
     font-weight: 700;
+    font-family: inherit;
     cursor: pointer;
-    transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
-  .primary-btn:hover {
+  .start-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(245, 174, 202, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   }
 
   .sessions-label {
     margin: 0;
-    color: #b57f95;
+    color: var(--muted);
     font-size: 0.9rem;
     padding: 0.6rem 1.2rem;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.45);
+    background: var(--surface);
+    border: 1px solid var(--border);
   }
 
   .focus-side {
@@ -284,40 +220,56 @@
   }
 
   .tip-card {
-    transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease;
+    border-radius: 2rem;
+    padding: 1.8rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
   .tip-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(245, 174, 202, 0.12);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   }
 
   .tip-title {
     margin: 0 0 1rem;
     font-size: 1.1rem;
     font-weight: 700;
-    color: #cf7fa2;
+    color: var(--heading-soft);
   }
 
   .tip-text {
     margin: 0;
-    color: #b57f95;
+    color: var(--muted);
     line-height: 1.8;
   }
 
   .glow-card {
-    background: linear-gradient(
-      135deg,
-      rgba(245, 174, 202, 0.22),
-      rgba(233, 198, 255, 0.22)
-    );
+    background: linear-gradient(135deg, var(--accent-3), var(--accent-2));
   }
 
   @media (max-width: 900px) {
-    .focus-wrap {
-      grid-template-columns: 1fr;
-    }
+    .focus-wrap { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .page-section { padding: 2rem 5% calc(1.5rem + 72px + env(safe-area-inset-bottom, 0px)); }
+    .focus-wrap { margin-top: 2.5rem; }
+    .mode-tabs { flex-wrap: wrap; justify-content: center; }
+    .mode-tabs button { flex: 1; min-width: 80px; text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    .page-section { padding: 1.5rem 4% calc(1rem + 72px + env(safe-area-inset-bottom, 0px)); }
+    .timer-display { font-size: clamp(4rem, 22vw, 7rem); }
+    .timer-card { padding: 1.5rem; gap: 1.5rem; }
+    .tip-card { padding: 1.3rem; border-radius: 1.5rem; }
+    .mode-tabs { padding: 0.35rem; }
+    .mode-tabs button { padding: 0.55rem 1rem; font-size: 0.82rem; }
+    .timer-actions { gap: 0.75rem; }
+    .start-btn { padding: 0.9rem 1.8rem; }
   }
 </style>

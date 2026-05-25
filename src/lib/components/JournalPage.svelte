@@ -31,7 +31,7 @@
   <p class="small-label">Dream Journal</p>
   <h2 class="page-title">Capture your midnight thoughts.</h2>
 
-  <div class="glass-card journal-input-card">
+  <div class="journal-input-card">
     <textarea
       bind:value={journalText}
       placeholder="What's on your mind tonight…"
@@ -39,25 +39,23 @@
     ></textarea>
     <div class="journal-actions">
       <span class="char-count">{journalText.length} chars</span>
-      <button class="primary-btn" onclick={addEntry}>Save entry</button>
+      <button class="save-btn" onclick={addEntry}>Save entry</button>
     </div>
   </div>
 
   <div class="entries-list">
     {#each entries as entry (entry.id)}
-      <div class="glass-card entry-card">
+      <div class="entry-card">
         <div class="entry-top">
           <span class="entry-date">{entry.date}</span>
-          <button class="del-btn" onclick={() => deleteEntry(entry.id)}
-            >✕</button
-          >
+          <button class="del-btn" onclick={() => deleteEntry(entry.id)}>✕</button>
         </div>
         <p class="entry-text">{entry.text}</p>
       </div>
     {/each}
 
     {#if entries.length === 0}
-      <div class="glass-card empty-card">
+      <div class="empty-card">
         <p>No entries yet. Write your first thought ✨</p>
       </div>
     {/if}
@@ -71,73 +69,16 @@
     padding: 2rem 8% 8rem;
   }
 
-  .page-glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.35;
-    pointer-events: none;
-  }
-
-  .glow-1 {
-    width: 320px;
-    height: 320px;
-    background: #f5aeca;
-    top: -80px;
-    left: -120px;
-  }
-
-  .glow-2 {
-    width: 280px;
-    height: 280px;
-    background: #e9c6ff;
-    bottom: -80px;
-    right: -100px;
-  }
-
-  .small-label {
-    position: relative;
-    z-index: 2;
-    color: #d483a6;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-size: 0.8rem;
-    margin-bottom: 1rem;
-  }
-
-  .page-title {
-    position: relative;
-    z-index: 2;
-    margin: 0;
-    font-size: clamp(3rem, 6vw, 5rem);
-    line-height: 1;
-    color: #cf7fa2;
-  }
-
-  .page-subtitle {
-    position: relative;
-    z-index: 2;
-    margin-top: 1.5rem;
-    max-width: 650px;
-    color: #b57f95;
-    line-height: 1.8;
-    font-size: 1.05rem;
-  }
-
-  .glass-card {
-    position: relative;
-    z-index: 2;
-    border-radius: 2rem;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.45);
-    border: 1px solid rgba(255, 182, 193, 0.15);
-    backdrop-filter: blur(25px);
-    box-shadow: 0 10px 40px rgba(245, 174, 202, 0.08);
-  }
-
   .journal-input-card {
     margin-top: 3rem;
     margin-bottom: 2rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -150,14 +91,15 @@
     resize: vertical;
     min-height: 140px;
     background: transparent;
-    color: #c97898;
+    color: var(--text);
     font-size: 1.05rem;
     font-family: inherit;
     line-height: 1.8;
+    -webkit-appearance: none;
   }
 
   textarea::placeholder {
-    color: rgba(180, 120, 145, 0.45);
+    color: var(--muted);
   }
 
   .journal-actions {
@@ -168,49 +110,51 @@
   }
 
   .char-count {
-    color: #b57f95;
+    color: var(--muted);
     font-size: 0.85rem;
   }
 
-  .primary-btn {
+  .save-btn {
     border: none;
     padding: 1rem 1.8rem;
     border-radius: 999px;
-    background: linear-gradient(135deg, #f5aeca, #e9c6ff);
+    background: linear-gradient(135deg, var(--btn-from), var(--btn-mid), var(--btn-to));
     color: white;
     font-size: 0.95rem;
     font-weight: 700;
+    font-family: inherit;
     cursor: pointer;
-    transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
-  .primary-btn:hover {
+  .save-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(245, 174, 202, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   }
 
   .entries-list {
-    position: relative;
-    z-index: 2;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
   }
 
   .entry-card {
+    padding: 1.8rem;
+    border-radius: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
   .entry-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 35px rgba(245, 174, 202, 0.12);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
   }
 
   .entry-top {
@@ -221,7 +165,7 @@
 
   .entry-date {
     font-size: 0.8rem;
-    color: #f5aeca;
+    color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.15em;
     font-weight: 700;
@@ -230,45 +174,52 @@
   .del-btn {
     border: none;
     background: transparent;
-    color: rgba(180, 120, 145, 0.5);
+    color: var(--muted);
     cursor: pointer;
     font-size: 1rem;
-    transition:
-      color 0.25s ease,
-      transform 0.25s ease;
+    opacity: 0.6;
+    transition: color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
   }
 
   .del-btn:hover {
-    color: #d483a6;
+    color: var(--heading);
+    opacity: 1;
     transform: scale(1.15);
   }
 
   .entry-text {
     margin: 0;
-    color: #b57f95;
+    color: var(--muted);
     line-height: 1.9;
     font-size: 1rem;
   }
 
   .empty-card {
-    text-align: center;
     padding: 3rem 2rem;
+    border-radius: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    text-align: center;
   }
 
   .empty-card p {
     margin: 0;
-    color: #b57f95;
+    color: var(--muted);
     font-size: 1rem;
   }
 
   @media (max-width: 768px) {
-    .journal-actions {
-      flex-direction: column;
-      align-items: stretch;
-    }
+    .page-section { padding: 2rem 5% calc(1.5rem + 72px + env(safe-area-inset-bottom, 0px)); }
+    .journal-actions { flex-direction: column; align-items: stretch; }
+    .save-btn { width: 100%; }
+    .journal-input-card { padding: 1.5rem; border-radius: 1.5rem; }
+    .entry-card { padding: 1.5rem; }
+  }
 
-    .primary-btn {
-      width: 100%;
-    }
+  @media (max-width: 480px) {
+    .page-section { padding: 1.5rem 4% calc(1rem + 72px + env(safe-area-inset-bottom, 0px)); }
+    .journal-input-card { margin-top: 2rem; }
+    textarea { font-size: 16px; min-height: 120px; }
+    .entry-card { border-radius: 1.5rem; }
   }
 </style>

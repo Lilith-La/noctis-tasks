@@ -22,7 +22,7 @@
 
 <Sidebar bind:currentPage />
 
-<main>
+<main class="app-main">
 
   <section class="hero">
     {#if settings.glowOn}
@@ -76,7 +76,7 @@
   }
 
   .label {
-    color: #f5aeca;
+    color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.35em;
     margin-bottom: 1.5rem;
@@ -88,14 +88,14 @@
     font-size: clamp(4.5rem, 11vw, 8rem);
     line-height: 0.9;
     letter-spacing: -0.05em;
-    color: #f2b3cb;
+    color: var(--heading);
   }
 
   .subtitle {
     margin: 2.5rem auto;
     max-width: 620px;
     line-height: 1.9;
-    color: rgba(255, 210, 228, 0.78);
+    color: var(--muted);
     font-size: 1.15rem;
   }
 
@@ -104,19 +104,19 @@
     border: none;
     padding: 1rem 2.3rem;
     border-radius: 999px;
-    background: linear-gradient(135deg, #ffc8dd, #f5b8d3, #e9c6ff);
+    background: linear-gradient(135deg, var(--btn-from), var(--btn-mid), var(--btn-to));
     color: white;
     font-weight: 700;
     font-size: 1rem;
     font-family: inherit;
     cursor: pointer;
-    box-shadow: 0 0 45px rgba(255, 192, 203, 0.28);
+    box-shadow: 0 0 45px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
   }
 
   .primary:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 0 60px rgba(255, 192, 203, 0.45);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.18);
     opacity: 0.95;
   }
 
@@ -127,9 +127,9 @@
     opacity: 0.5;
   }
 
-  .glow-1 { width: 550px; height: 550px; background: rgba(255,192,203,0.3);  top: -120px; left: -160px; }
-  .glow-2 { width: 500px; height: 500px; background: rgba(233,198,255,0.28); bottom: -120px; right: -140px; }
-  .glow-3 { width: 380px; height: 380px; background: rgba(255,214,231,0.24); top: 40%; left: 50%; transform: translate(-50%,-50%); }
+  .glow-1 { width: 550px; height: 550px; background: var(--hero-glow-1); top: -120px; left: -160px; }
+  .glow-2 { width: 500px; height: 500px; background: var(--hero-glow-2); bottom: -120px; right: -140px; }
+  .glow-3 { width: 380px; height: 380px; background: var(--hero-glow-3); top: 40%; left: 50%; transform: translate(-50%,-50%); }
 
   .stars {
     position: absolute;
@@ -145,9 +145,26 @@
     to   { transform: translateY(-140px); }
   }
 
+  .app-main {
+    /* desktop: no extra spacing needed */
+  }
+
   @media (max-width: 768px) {
-    h1        { font-size: clamp(3.5rem, 14vw, 6rem); }
-    .subtitle { font-size: 1rem; }
-    .primary  { width: 100%; }
+    .app-main {
+      /* clear the fixed bottom nav */
+      padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    }
+    h1        { font-size: clamp(3rem, 14vw, 6rem); }
+    .subtitle { font-size: 1rem; margin: 2rem auto; }
+    .primary  { width: 100%; max-width: 320px; }
+    .hero     { padding: 5rem 1.5rem 3rem; }
+  }
+
+  @media (max-width: 480px) {
+    h1        { font-size: clamp(2.6rem, 15vw, 4.5rem); line-height: 1.05; }
+    .label    { font-size: 0.72rem; letter-spacing: 0.22em; }
+    .subtitle { font-size: 0.92rem; margin: 1.8rem auto; max-width: 90%; }
+    .hero     { padding: 3.5rem 1.4rem 3rem; }
+    .primary  { max-width: 280px; }
   }
 </style>

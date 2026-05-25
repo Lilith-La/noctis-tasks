@@ -2,8 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="text-scale" content="scale" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <script>
+      try {
+        var V={pink:{'--bg':'#fff7fb','--surface':'rgba(255,255,255,0.45)','--surface-strong':'rgba(255,255,255,0.65)','--border':'rgba(255,182,193,0.18)','--text':'#c97898','--muted':'rgba(180,120,145,0.72)','--heading':'#d483a6','--heading-soft':'#cf7fa2','--accent':'#f5aeca','--accent-2':'#e9c6ff','--accent-3':'#ffd6e7','--btn-from':'#ffc8dd','--btn-mid':'#f5b8d3','--btn-to':'#e9c6ff','--glow-1':'rgba(255,192,203,0.28)','--glow-2':'rgba(255,220,230,0.30)','--glow-center':'rgba(255,255,255,0.45)'},lavender:{'--bg':'#f5f3ff','--surface':'rgba(255,255,255,0.45)','--surface-strong':'rgba(255,255,255,0.68)','--border':'rgba(160,145,220,0.20)','--text':'#7a6fb5','--muted':'rgba(120,108,175,0.72)','--heading':'#8c7fd4','--heading-soft':'#7a6fb5','--accent':'#b8a9f5','--accent-2':'#9b8de8','--accent-3':'#d8d0ff','--btn-from':'#c5b3f5','--btn-mid':'#b8a9f5','--btn-to':'#9b8de8','--glow-1':'rgba(180,160,245,0.25)','--glow-2':'rgba(155,141,232,0.22)','--glow-center':'rgba(245,243,255,0.50)'},rose:{'--bg':'#fff2f6','--surface':'rgba(255,255,255,0.45)','--surface-strong':'rgba(255,255,255,0.68)','--border':'rgba(240,127,160,0.18)','--text':'#c05878','--muted':'rgba(170,88,115,0.72)','--heading':'#d4607e','--heading-soft':'#c05878','--accent':'#f07fa0','--accent-2':'#e8a0b8','--accent-3':'#ffc8d8','--btn-from':'#ff8fab','--btn-mid':'#f07fa0','--btn-to':'#e8a0b8','--glow-1':'rgba(255,143,171,0.28)','--glow-2':'rgba(232,160,184,0.25)','--glow-center':'rgba(255,255,255,0.45)'},dark:{'--bg':'#100b15','--surface':'rgba(255,255,255,0.07)','--surface-strong':'rgba(18,12,26,0.92)','--border':'rgba(245,174,202,0.13)','--text':'#e0a8c4','--muted':'rgba(210,155,185,0.62)','--heading':'#f5c8de','--heading-soft':'#e8aac4','--accent':'#f5aeca','--accent-2':'#c9a8e8','--accent-3':'rgba(245,174,202,0.20)','--btn-from':'#c87ab5','--btn-mid':'#e09ac8','--btn-to':'#b89ae0','--glow-1':'rgba(200,100,150,0.22)','--glow-2':'rgba(160,100,210,0.18)','--glow-center':'rgba(30,15,40,0.60)'}};
+        var s=JSON.parse(localStorage.getItem('noctis-settings')||'{}');
+        var t=s.theme||'pink';
+        var el=document.documentElement;
+        el.setAttribute('data-theme',t);
+        if(t==='dark')el.style.colorScheme='dark';
+        var vars=V[t]||V.pink;
+        Object.entries(vars).forEach(function(e){el.style.setProperty(e[0],e[1]);});
+      } catch(e) {}
+    </script>
     %sveltekit.head%
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 

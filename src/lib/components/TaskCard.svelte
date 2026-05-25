@@ -25,15 +25,16 @@
     align-items: center;
     padding: 1.2rem 1.8rem;
     border-radius: 2rem;
-    background: rgba(255, 255, 255, 0.42);
-    border: 1px solid rgba(255, 182, 193, 0.15);
+    background: var(--surface);
+    border: 1px solid var(--border);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
   .task-item:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(245, 174, 202, 0.12);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   }
 
   .left {
@@ -46,7 +47,7 @@
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    border: 2px solid #f5aeca;
+    border: 2px solid var(--accent);
     background: transparent;
     color: white;
     font-size: 0.85rem;
@@ -58,17 +59,17 @@
 
   .circle:hover {
     transform: scale(1.1);
-    border-color: #e9c6ff;
+    border-color: var(--accent-2);
   }
 
   .circle.completed {
-    background: linear-gradient(135deg, #f5aeca, #e9c6ff);
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
     border: none;
   }
 
   p {
     margin: 0;
-    color: #c97898;
+    color: var(--text);
     font-size: 1rem;
     line-height: 1.5;
     transition: opacity 0.25s ease;
@@ -82,17 +83,19 @@
   .delete {
     border: none;
     background: transparent;
-    color: rgba(180, 120, 145, 0.4);
+    color: var(--muted);
     font-size: 0.95rem;
     font-family: inherit;
     cursor: pointer;
     padding: 0.3rem 0.5rem;
     border-radius: 999px;
-    transition: color 0.2s ease, background 0.2s ease;
+    opacity: 0.6;
+    transition: color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
   }
 
   .delete:hover {
-    color: #d483a6;
-    background: rgba(245, 174, 202, 0.12);
+    color: var(--heading);
+    background: var(--surface);
+    opacity: 1;
   }
 </style>

@@ -92,6 +92,7 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    min-height: 60vh;
   }
 
   .dashboard {
@@ -111,16 +112,17 @@
   h2 {
     margin-top: 1rem;
     font-size: clamp(2.5rem, 5vw, 4rem);
-    color: #d483a6;
+    color: var(--heading);
   }
 
   .progress-card {
     min-width: 260px;
     padding: 1.5rem;
     border-radius: 2rem;
-    background: rgba(255, 255, 255, 0.45);
+    background: var(--surface);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 182, 193, 0.18);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
   }
 
   .progress-card span {
@@ -140,19 +142,20 @@
     border-radius: 999px;
     overflow: hidden;
     margin: 1rem 0;
-    background: rgba(255, 255, 255, 0.4);
+    background: var(--surface);
+    border: 1px solid var(--border);
   }
 
   .progress-fill {
-    width: 72%;
     height: 100%;
     border-radius: 999px;
-    background: linear-gradient(90deg, #f5aeca, #e9c6ff);
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transition: width 0.6s ease;
   }
 
   .task-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
     gap: 1.5rem;
     align-items: start;
   }
@@ -160,16 +163,17 @@
   .task-card {
     padding: 2rem;
     border-radius: 2rem;
-    background: rgba(255, 255, 255, 0.42);
+    background: var(--surface);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 182, 193, 0.15);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     align-self: start;
   }
 
   .task-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 15px 40px rgba(245, 174, 202, 0.15);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
   }
 
   .task-card.big { grid-column: span 2; }
@@ -193,9 +197,9 @@
     margin-bottom: 1.2rem;
   }
 
-  .tag.pink     { background: rgba(245,174,202,0.2);  color: #d87098; }
-  .tag.purple   { background: rgba(233,198,255,0.22); color: #a46ad6; }
-  .tag.peach    { background: rgba(255,214,231,0.3);  color: #d88ca8; }
+  .tag.pink     { background: var(--accent-3);         color: var(--heading-soft); }
+  .tag.purple   { background: var(--tag-study-bg);     color: var(--tag-study-text); }
+  .tag.peach    { background: var(--tag-wellness-bg);  color: var(--tag-wellness-text); }
 
   .time {
     color: var(--muted);
@@ -204,7 +208,7 @@
 
   .task-card h3 {
     margin: 0;
-    color: #cf7fa2;
+    color: var(--heading-soft);
     font-size: 2.2rem;
     line-height: 1.1;
   }
@@ -217,11 +221,28 @@
   }
 
   .glow-card {
-    background: linear-gradient(135deg, rgba(245,174,202,0.3), rgba(233,198,255,0.25));
+    background: linear-gradient(135deg, var(--accent-3), var(--accent-2));
   }
 
   @media (max-width: 768px) {
-    .dashboard-top { flex-direction: column; align-items: start; }
+    .tasks-section {
+      padding: 0 5% calc(2rem + 72px + env(safe-area-inset-bottom, 0px));
+    }
+    .dashboard-top { flex-direction: column; align-items: stretch; }
+    .progress-card { min-width: unset; width: 100%; }
     .task-card.big { grid-column: span 1; }
+    h2 { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+  }
+
+  @media (max-width: 480px) {
+    .tasks-section {
+      padding: 0 4% calc(1.5rem + 72px + env(safe-area-inset-bottom, 0px));
+    }
+    .task-grid { gap: 0.85rem; }
+    .task-card { padding: 1.3rem; border-radius: 1.5rem; }
+    .task-card h3 { font-size: 1.45rem; }
+    .task-card p { font-size: 0.95rem; }
+    .dashboard { padding: 1.5rem 0; }
+    .dashboard-top { margin-bottom: 1.8rem; gap: 1rem; }
   }
 </style>
